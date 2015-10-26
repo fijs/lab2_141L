@@ -32,7 +32,7 @@ logic [31:0] alu_result, rs_val_or_zero, rd_val_or_zero, rs_val, rd_val;
 logic [($bits(instruction.rs_imm))-1:0] rd_addr;
 
 // Data for Reg. File signals
-logic [31:0] rf_wd;
+logic [31:0] rf_wd, rf_wa_i;
 
 //---- Control signals ----//
 // ALU output to determin whether to jump or not
@@ -103,6 +103,8 @@ reg_file #(.addr_width_p($bits(instruction.rs_imm))) rf
           (.clk(clk)
           ,.rs_addr_i(instruction.rs_imm)
           ,.rd_addr_i(rd_addr)
+			 //added input to port wa_i
+			 ,.rf_wa_i(instruction.rd)
           ,.wen_i(rf_wen)
           ,.write_data_i(rf_wd)
           ,.rs_val_o(rs_val)

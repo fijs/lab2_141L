@@ -1,24 +1,28 @@
 // A register file with asynchronous read and synchronous write
-module reg_file #(parameter addr_width_p = 6)
+module reg_file #(parameter NUM_REGS = 8,
+                  ADR_WIDTH = $clog2(NUM_REGS),
+                  DATA_WIDTH=16)
                 (input clk
-                ,input [addr_width_p-1:0] rs_addr_i
-                ,input [addr_width_p-1:0] rd_addr_i
+                ,input [ADR_WIDTH-1:0] rs_addr_i
+                ,input [ADR_WIDTH-1:0] rd_addr_i
+		,input [ADR_WIDTH-1:0] wa_i
                 ,input wen_i
-                ,input [31:0] write_data_i
-                ,output logic [31:0] rs_val_o
-                ,output logic [31:0] rd_val_o
+                ,input [DATA_WIDTH-1:0] write_data_i
+                ,output [DATA_WIDTH-1:0] rs_val_o
+                ,output [DATA_WIDTH-1:0] rd_val_o
                 );
 
-logic [31:0] RF [2**addr_width_p-1:0];
+// declare memory/reg file array itself
+logic [DATA_WIDTH-1:0] RF [2**ADR_WIDTH];	// RF [NUM_REGS] ???
 
+// reads are combinational
 assign rs_val_o = RF [rs_addr_i];
 assign rd_val_o = RF [rd_addr_i];
 
+// writes are sequential/clocked
 always_ff @ (posedge clk)
-  begin
-    if (wen_i)
-      RF [rd_addr_i] <= write_data_i;
-  end
+  if (wen_i)
+    RF [wa_i] <= write_data_i;
 
 endmodule
 

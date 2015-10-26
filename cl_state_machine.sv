@@ -1,4 +1,4 @@
-`include "definitions.v"
+`include "definitions.sv"
 
 module cl_state_machine(input  instruction_s instruction_i
                        ,input  state_e       state_i

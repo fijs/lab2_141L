@@ -17,7 +17,7 @@ always_comb
       `kSUBU:  result_o   = rd_i -  rs_i;
       `kSLLV:  result_o   = rd_i << rs_i[4:0];
       `kSRAV:  result_o   = $signed (rd_i)   >>> rs_i[4:0];
-      `kSRLV:  result_o   = $unsigned (rd_i) >>  rs_i[4:0]; 
+      `kSRLV:  result_o   = $unsigned (rd_i) >>  rs_i[4:0];
       `kAND:   result_o   = rd_i & rs_i;
       `kOR:    result_o   = rd_i | rs_i;
       `kNOR:   result_o   = ~ (rd_i|rs_i);
