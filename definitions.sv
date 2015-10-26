@@ -81,7 +81,7 @@ parameter mask_length_gp = 3;
 // a struct for instructions
 typedef struct packed{
         logic [4:0]  opcode;
-        logic [rd_size_gp-1:0] rd;
+        logic [rd_size_gp-1:0] rd;  //rd_size_gp = 5
         logic [rs_imm_size_gp-1:0] rs_imm;
         } instruction_s;
 

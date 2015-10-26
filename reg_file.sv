@@ -1,11 +1,12 @@
 // A register file with asynchronous read and synchronous write
-module reg_file #(parameter NUM_REGS = 8,
+module reg_file #(parameter NUM_REGS = 32,
                   ADR_WIDTH = $clog2(NUM_REGS),
-                  DATA_WIDTH=16)
+                  DATA_WIDTH=16,
+						addr_width_p = 6)
                 (input clk
                 ,input [ADR_WIDTH-1:0] rs_addr_i
                 ,input [ADR_WIDTH-1:0] rd_addr_i
-		,input [ADR_WIDTH-1:0] wa_i
+		          ,input [ADR_WIDTH-1:0] wa_i   //ADR_WIDTH = 5
                 ,input wen_i
                 ,input [DATA_WIDTH-1:0] write_data_i
                 ,output [DATA_WIDTH-1:0] rs_val_o
